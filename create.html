@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Criar Cards</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Criar Card</h1>
+
+  <label>Assunto:</label><br>
+  <input id="subject" type="text"><br><br>
+
+  <label>Pergunta:</label><br>
+  <input id="question" type="text"><br><br>
+
+  <label>Resposta:</label><br>
+  <input id="answer" type="text"><br><br>
+
+  <button onclick="criarCard()">Criar Card</button>
+
+  <br><br>
+  <a href="index.html">Voltar</a>
+
+  <script src="/js/storege.js"></script>
+  <script>
+    function criarCard() {
+      const subject = document.getElementById('subject').value.trim();
+      const question = document.getElementById('question').value.trim();
+      const answer = document.getElementById('answer').value.trim();
+
+      if (!subject || !question || !answer) {
+        alert('Preencha todos os campos!');
+        return;
+      }
+
+      const card = {
+        id: Date.now(),
+        subject,
+        question,
+        answer,
+        nextReview: new Date().toISOString().split('T')[0],
+        interval: 1
+      };
+
+      const cards = carregarCards();
+      cards.push(card);
+      salvarCards(cards);
+
+      alert('Card criado!');
+      document.getElementById('subject').value = '';
+      document.getElementById('question').value = '';
+      document.getElementById('answer').value = '';
+    }
+  </script>
+</body>
+</html>
