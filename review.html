@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Revisar Cards</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Revisar Cards</h1>
+
+  <label>Assunto:</label>
+  <input id="subject" type="text">
+  <button onclick="filtrar()">Filtrar</button>
+
+  <div id="review" style="margin-top:20px;"></div>
+
+  <br>
+  <a href="index.html">Voltar</a>
+
+ <script src="/js/storege.js"></script>
+  <script>
+    let cardsParaRevisar = [];
+    let current = 0;
+
+    function filtrar() {
+      const assunto = document.getElementById('subject').value.trim();
+      const hoje = new Date().toISOString().split('T')[0];
+      const todos = carregarCards();
+
+      cardsParaRevisar = todos.filter(c => c.subject.includes(assunto) && c.nextReview <= hoje);
+      current = 0;
+      mostrarCard();
+    }
+
+    function mostrarCard() {
+      const div = document.getElementById('review');
+      if (current >= cardsParaRevisar.length) {
+        div.innerHTML = '<p>Revisão concluída!</p>';
+        return;
+      }
+
+      const card = cardsParaRevisar[current];
+      div.innerHTML = `
+        <h3>${card.question}</h3>
+        <button onclick="mostrarResposta()">Mostrar Resposta</button>
+        <div id="resposta" style="margin:10px 0;"></div>
+        <button onclick="responder(true)">Acertou</button>
+        <button onclick="responder(false)">Errou</button>
+      `;
+    }
+
+    function mostrarResposta() {
+      const card = cardsParaRevisar[current];
+      document.getElementById('resposta').innerText = card.answer;
+    }
+
+    function responder(acertou) {
+      const card = cardsParaRevisar[current];
+      if (acertou) {
+        card.interval = card.interval * 2;
+      } else {
+        card.interval = 1;
+      }
+
+      const proxima = new Date();
+      proxima.setDate(proxima.getDate() + card.interval);
+      card.nextReview = proxima.toISOString().split('T')[0];
+
+      const todos = carregarCards();
+      const index = todos.findIndex(c => c.id === card.id);
+      todos[index] = card;
+      salvarCards(todos);
+
+      current++;
+      mostrarCard();
+    }
+  </script>
+</body>
+</html>
