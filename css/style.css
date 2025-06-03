@@ -1,0 +1,131 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Cabeçalhos */
+h1, h2, h3 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+/* Containers */
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    margin-bottom: 16px;
+    background-color: #fff;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #7c3aed;
+}
+
+/* Botões */
+button {
+    background-color: #7c3aed;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #5b21b6;
+    transform: scale(1.03);
+}
+
+/* Cartões */
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+/* Navegação */
+nav {
+    background-color: #7c3aed;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+/* Listas */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px 0;
+}
+
+/* Citações com efeito de zoom */
+blockquote {
+    background: #f0f0f0;
+    border-left: 5px solid #7c3aed;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    transition: transform 0.3s;
+}
+
+blockquote:hover {
+    transform: scale(1.03);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    nav {
+        text-align: center;
+    }
+    nav a {
+        display: block;
+        margin: 8px 0;
+    }
+}
